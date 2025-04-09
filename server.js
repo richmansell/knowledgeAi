@@ -11,7 +11,7 @@ app.post('/changeText', async (req, res) => {
 
   // === INSERT OPENAI INTEGRATION HERE ===
   // Example: use content and charsToRemove to modify text
-  const promptContent = `Number of characters to remove: ${charstoRemove} 
+  const promptContent = `Number of characters to remove: ${charsToRemove} 
   The text: ${content}`
 
   const systemContent = `You are an expert at modifying text to ensure it fits within a certain character limit.
@@ -38,7 +38,7 @@ app.post('/shortText', async (req, res) => {
 
   // === INSERT OPENAI INTEGRATION HERE ===
   // Example: use content and charsToRemove to shorten text
-  const promptContent = `Number of characters to remove: ${charstoRemove} 
+  const promptContent = `Number of characters to remove: ${charsToRemove} 
   The text: ${content}`
 
   const systemContent = `You are an expert as subbing text to ensure it fits within a certain character limit.
