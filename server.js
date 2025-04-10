@@ -39,11 +39,9 @@ app.post('/shortText', async (req, res) => {
 
   // === INSERT OPENAI INTEGRATION HERE ===
   // Example: use content and charsToRemove to shorten text
-  const promptContent = `Number of characters to remove: ${charsToRemove} 
-  The text: ${content}`
-
-  const systemContent = `You are an expert as subbing text to ensure it fits within a certain character limit.
-  You are an experienced newspaper editor and you will always ensure that the text is engaging and interesting.
+  const promptContent = `You are an expert newspaper editor whos job is to reduce supplied text by a number of characters
+  You will only respond with the text, exactly as it is requested.
+  You will always ensure that the text is engaging and interesting.
   You will always end each line with a single new line marker as \n
   You will always keep new lines where they were in the text
   You will always remove the exact amount or MORE characters than specified
@@ -54,7 +52,12 @@ app.post('/shortText', async (req, res) => {
   You will never generate text that is longer than the number of characters in the string, minus the number of characters to remove
   The text will always make grammatical sense.
   You will always remove the least important information from the text.
-  Do not add additional punctuation to the text.`
+  Do not add additional punctuation to the text.
+  
+  Number of characters to remove: ${charsToRemove} 
+  The text: ${content}`
+
+  const systemContent = `You are an expert as subbing text to ensure it fits within a certain character limit.`
 
   // Get a summary of the story through the custom prompt
   const response = await makeCustomRequest(promptContent, systemContent)
