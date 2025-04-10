@@ -11,7 +11,7 @@ app.post('/changeText', async (req, res) => {
 
   // === INSERT OPENAI INTEGRATION HERE ===
   // Example: use content and charsToRemove to modify text
-  const promptContent = `Number of characters to remove: ${charstoRemove} 
+  const promptContent = `Number of characters to remove: ${charsToRemove} 
   The text: ${content}`
 
   const systemContent = `You are an expert at modifying text to ensure it fits within a certain character limit.
@@ -23,7 +23,8 @@ app.post('/changeText', async (req, res) => {
   You will always remove the exact amount or MORE characters than specified
   You will always ensure the number of characters removed is as close to the number of characters specified as possible
   You will note provide a response that is longer than the number of characters in the string, minus the number of characters to remove
-  The text will always make grammatical sense.`
+  The text will always make grammatical sense.
+  Do not add additional punctuation to the text.`
 
   // Get a summary of the story through the custom prompt
   const response = await makeCustomRequest(promptContent, systemContent)
@@ -38,19 +39,22 @@ app.post('/shortText', async (req, res) => {
 
   // === INSERT OPENAI INTEGRATION HERE ===
   // Example: use content and charsToRemove to shorten text
-  const promptContent = `Number of characters to remove: ${charstoRemove} 
+  const promptContent = `Number of characters to remove: ${charsToRemove} 
   The text: ${content}`
 
   const systemContent = `You are an expert as subbing text to ensure it fits within a certain character limit.
   You are an experienced newspaper editor and you will always ensure that the text is engaging and interesting.
+  You will always end each line with "\n"
+  You will always keep new lines where they were in the text
+  You will always remove the exact amount or MORE characters than specified
+  You will always ensure the number of characters removed is as close to the number of characters specified as possible
   You will never modify the text that has been provided
   You will only ever remove whole sentences from the text
   You will not change the content of any of the text
-  You will always remove the number of characters specified or more
-  You will ensure the number of characters removed is as close to the number of characters specified as possible
   You will never generate text that is longer than the number of characters in the string, minus the number of characters to remove
   The text will always make grammatical sense.
-  You will always remove the least important information from the text.`
+  You will always remove the least important information from the text.
+  Do not add additional punctuation to the text.`
 
   // Get a summary of the story through the custom prompt
   const response = await makeCustomRequest(promptContent, systemContent)
