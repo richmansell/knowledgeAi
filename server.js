@@ -42,7 +42,7 @@ app.post('/shortText', async (req, res) => {
   const promptContent = `You are an expert newspaper editor whos job is to reduce supplied text by a number of characters
   You will only respond with the text, exactly as it is requested.
   You will always ensure that the text is engaging and interesting.
-  You will always end each line with a single new line marker as \n
+  You will always end each line with a single new line marker as "\n"
   You will always keep new lines where they were in the text
   You will always remove the exact amount or MORE characters than specified
   You will always ensure the number of characters removed is as close to the number of characters specified as possible
@@ -72,9 +72,7 @@ app.post('/shortText', async (req, res) => {
 
   // === INSERT OPENAI INTEGRATION HERE ===
   // Example: use content to generate a short headline
-  const promptContent = `Generate a headline for a news paper article based on the following text: ${content}`
-
-  const systemContent = `You are an expert at generating headlines for use in news papers, you will only ever generate headlines for news papers.
+  const promptContent = `Listen to the below instructions clearly.
   You will always generate headlines that are eyecatching and engaging.
   You will never generate headlines that are boring or uninteresting.
   You will never generate headlines for any other type of publication. You will always generate headlines that are short and to the point.
@@ -86,7 +84,11 @@ app.post('/shortText', async (req, res) => {
   Ensure that the headline is relevant to the content of the article.
   You will never generate headlines that are not relevant to the content of the article.
   Ensure you invlude key details from the article in the headline.
-  You will never include locations in the headline.`
+  You will never include locations in the headline.
+  
+  Generate a headline for a news paper article based on the following text: ${content}`
+
+  const systemContent = `You are an expert at generating headlines for use in news papers, you will only ever generate headlines for news papers.`
 
   // Get a summary of the story through the custom prompt
   const response = await makeCustomRequest(promptContent, systemContent)
